@@ -1,12 +1,7 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <head>
-<html:html lang="true">
-      <meta charset="utf-8">
+<html>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,28 +25,28 @@
       <a class="navbar-brand" href="#">Search 'N Serve</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-              <span class="nav-link"><html:link action='home'>Home</html:link></span>
+            <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <html:link action='opportunities'>Opportunities</html:link>
+            <a class="nav-link" href="#">Opportunites</a>
           </li>
           <li class="nav-item">
-              <html:link action='about'>About</html:link>
+            <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-              <html:link action='contact-us'>Contact Us</html:link>
+            <a class="nav-link" href="#">Contact Us</a>
           </li>
           <li class="nav-item">
-              <html:link action='sign-up'>Sign Up</html:link>
+            <a class="nav-link" href="#">
+              <span>Sign Up</span></a>
           </li>
           <li class="nav-item">
-              <html:link action='login'>Login</html:link>
+            <a class="nav-link" href="#">
+              <span>Login</span></a>
           </li>
         </ul>
-        <!--this doesn't work at all, not really sure how to get the forms to work 
-        without breaking styling -->
-        <form action="'searchForm'" class="form-inline mt-2 mt-md-0">
+        <form action="searchForm" class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search"> 
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <form>
@@ -201,4 +196,4 @@
       });
     </script>
   </body>
-</html:html>
+</html>
