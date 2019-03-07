@@ -34,24 +34,24 @@
               <span class="nav-link"><html:link action='home'>Home</html:link></span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<s:url action='opportunities'/>">Opportunites</a>
+            <html:link action='opportunities'>Opportunities</html:link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<s:url action='about'/>">About</a>
+              <html:link action='about'>About</html:link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<s:url action='contact-us'/>">Contact Us</a>
+              <html:link action='contact-us'>Contact Us</html:link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<s:url action='signup'/>">
-              <span>Sign Up</span></a>
+              <html:link action='sign-up'>Sign Up</html:link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<s:url action='loginForm.do'/>">
-              <span>Login</span></a>
+              <html:link action='login'>Login</html:link>
           </li>
         </ul>
-        <form action="'loginForm'" class="form-inline mt-2 mt-md-0">
+        <!--this doesn't work at all, not really sure how to get the forms to work 
+        without breaking styling -->
+        <form action="'searchForm'" class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search"> 
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <form>
