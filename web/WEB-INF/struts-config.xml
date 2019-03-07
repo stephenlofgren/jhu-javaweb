@@ -18,6 +18,9 @@
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
     </global-forwards>
+    <global-forwards>
+        <forward name="login"  path="/login.jsp"/>
+    </global-forwards>
 
     <action-mappings>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
