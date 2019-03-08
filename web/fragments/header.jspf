@@ -7,28 +7,28 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="HomeController">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Opportunites</a>
+            <a class="nav-link" href="OpportunitiesController">Opportunites</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="AboutController">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
+            <a class="nav-link" href="ContactController">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="SignupController">
               <span>Sign Up</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="LoginController">
               <span>Login</span></a>
           </li>
         </ul>
-        <form action="searchForm" class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search"> 
+        <form action="OpportunitiesController" class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" name='searchText' type="text" placeholder="Search"> 
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <form>
       </div>
