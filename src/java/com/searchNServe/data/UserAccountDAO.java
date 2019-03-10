@@ -1,5 +1,6 @@
 package com.searchNServe.data;
 
+import com.searchNServe.model.UserAccountDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
