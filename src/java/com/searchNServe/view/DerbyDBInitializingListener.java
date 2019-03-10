@@ -16,9 +16,14 @@ public class DerbyDBInitializingListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-         
-           OpportunityDB.insert(new Opportunity());
-       
+        Opportunity o = new Opportunity();
+        o.setContactName("Stephen Lofgren");
+        o.setTitle("Tutoring at the YMCA");
+        o.setDescription("Helping younger students with their homework");
+        o.setEmailAddress("fakevolunteeringcontact@ymca.org");
+        o.setCity("Basking Ridge");
+        o.setState("New Jersey");
+        OpportunityDB.insert(o);
         //DBUtil.initializeDB();
     }
 

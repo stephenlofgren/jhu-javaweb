@@ -24,7 +24,8 @@ public class Opportunity implements Serializable {
     private Long id;
     private String title;
     private String description;
-    private String location;
+    private String city;
+    private String state;
     private LocalTime startTime;
     private LocalTime endTime;
     private String contactName;
@@ -63,12 +64,20 @@ public class Opportunity implements Serializable {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public String getState() {
+        return state;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public LocalTime getStartTime() {
