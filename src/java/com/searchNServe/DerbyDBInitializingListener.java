@@ -1,4 +1,4 @@
-package com.searchNServe.view;
+package com.searchNServe;
 
 import javax.persistence.*;
 import javax.servlet.*;
@@ -16,6 +16,8 @@ public class DerbyDBInitializingListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        
+        //example create object
         Opportunity o = new Opportunity();
         o.setContactName("Stephen Lofgren");
         o.setTitle("Tutoring at the YMCA");
@@ -24,7 +26,10 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         o.setCity("Basking Ridge");
         o.setState("New Jersey");
         OpportunityDB.insert(o);
-        //DBUtil.initializeDB();
+        
+        //clean up the example and demo run simple update query
+        EMFUtil.runUpdate("delete from Opportunity");
+        
     }
 
     @Override
