@@ -6,23 +6,24 @@
 package com.searchNServe.data;
 
 import com.searchNServe.model.Opportunity;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * @param <T> the type of the Entity being persisted
  * @author stephen
- */
-public class OpportunityDB {
+ */ 
+public class GenericEntity {
     
-    public static void insert(Opportunity opportunity){
+    public static <T> void insert(T t){
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();
         try{
-            em.persist(opportunity);
+            em.persist(t);
             trans.commit();
         } catch(Exception ex) {
             trans.rollback();
@@ -32,12 +33,12 @@ public class OpportunityDB {
         }
     }
     
-        public static void update(Opportunity opportunity) {
+        public static <T> void update(T t) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();       
         try {
-            em.merge(opportunity);
+            em.merge(t);
             trans.commit();
         } catch (Exception e) {
             System.out.println(e);
@@ -47,12 +48,12 @@ public class OpportunityDB {
         }
     }
 
-    public static void delete(Opportunity opportunity) {
+    public static <T> void delete(T t) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();        
         try {
-            em.remove(em.merge(opportunity));
+            em.remove(em.merge(t));
             trans.commit();
         } catch (Exception e) {
             System.out.println(e);
@@ -61,25 +62,20 @@ public class OpportunityDB {
             em.close();
         }       
     }
-
-    public static Opportunity selectOpportunity(String email) {
+    
+    public static <T> T select(String qString, Map<String, Object> parameters, Class<T> typeClass) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
-        String qString = "SELECT u FROM Opportunity u " +
-                "WHERE u.email = :email";
-        TypedQuery<Opportunity> q = em.createQuery(qString, Opportunity.class);
-        q.setParameter("email", email);
+        TypedQuery<T> q = em.createQuery(qString, typeClass);
+        for (Map.Entry<String,Object> entry : parameters.entrySet()){
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
         try {
-            Opportunity o = q.getSingleResult();
+            T o = q.getSingleResult();
             return o;
         } catch (NoResultException e) {
             return null;
         } finally {
             em.close();
         }
-    }
-
-    public static boolean emailExists(String email) {
-        Opportunity u = selectOpportunity(email);   
-        return u != null;
     }
 }

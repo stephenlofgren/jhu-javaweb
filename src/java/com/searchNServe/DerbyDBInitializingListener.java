@@ -2,7 +2,6 @@ package com.searchNServe;
 
 import javax.persistence.*;
 import javax.servlet.*;
-import com.searchNServe.data.DBUtil;
 import com.searchNServe.data.EMFUtil;
 import com.searchNServe.data.OpportunityDB;
 import com.searchNServe.model.Opportunity;
