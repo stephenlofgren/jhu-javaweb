@@ -3,6 +3,7 @@ package com.searchNServe;
 import javax.persistence.*;
 import javax.servlet.*;
 import com.searchNServe.data.EMFUtil;
+import com.searchNServe.data.GenericEntityDB;
 import com.searchNServe.data.OpportunityDB;
 import com.searchNServe.model.Opportunity;
 import javax.persistence.EntityManagerFactory;
@@ -24,7 +25,10 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         o.setEmailAddress("fakevolunteeringcontact@ymca.org");
         o.setCity("Basking Ridge");
         o.setState("New Jersey");
-        OpportunityDB.insert(o);
+        GenericEntityDB.<Opportunity>insert(o);
+        
+        Opportunity sameOp;
+        sameOp = OpportunityDB.selectOpportunity("Tutoring at the YMCA");
         
         //clean up the example and demo run simple update query
         EMFUtil.runUpdate("delete from Opportunity");

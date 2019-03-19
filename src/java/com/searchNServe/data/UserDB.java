@@ -9,6 +9,6 @@ package com.searchNServe.data;
  *
  * @author stephen
  */
-public class UserDB  extends GenericEntity{
+public class UserDB{
     
 }

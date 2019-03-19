@@ -6,6 +6,7 @@
 package com.searchNServe.data;
 
 import com.searchNServe.model.Opportunity;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -16,7 +17,7 @@ import javax.persistence.TypedQuery;
  * @param <T> the type of the Entity being persisted
  * @author stephen
  */ 
-public class GenericEntity {
+public class GenericEntityDB {
     
     public static <T> void insert(T t){
         EntityManager em = EMFUtil.getFactory().createEntityManager();
@@ -55,7 +56,7 @@ public class GenericEntity {
         try {
             em.remove(em.merge(t));
             trans.commit();
-        } catch (Exception e) {
+        } catch (   Exception e) {
             System.out.println(e);
             trans.rollback();
         } finally {
@@ -70,8 +71,8 @@ public class GenericEntity {
             q.setParameter(entry.getKey(), entry.getValue());
         }
         try {
-            T o = q.getSingleResult();
-            return o;
+            List<T> o = q.getResultList();
+            return o.get(0);
         } catch (NoResultException e) {
             return null;
         } finally {
