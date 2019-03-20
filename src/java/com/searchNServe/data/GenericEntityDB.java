@@ -64,7 +64,7 @@ public class GenericEntityDB {
         }       
     }
     
-    public static <T> T select(String qString, Map<String, Object> parameters, Class<T> typeClass) {
+    public static <T> T selectOne(String qString, Map<String, Object> parameters, Class<T> typeClass) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         TypedQuery<T> q = em.createQuery(qString, typeClass);
         for (Map.Entry<String,Object> entry : parameters.entrySet()){
@@ -73,6 +73,21 @@ public class GenericEntityDB {
         try {
             List<T> o = q.getResultList();
             return o.get(0);
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    public static <T> List<T> select(String qString, Map<String, Object> parameters, Class<T> typeClass) {
+        EntityManager em = EMFUtil.getFactory().createEntityManager();
+        TypedQuery<T> q = em.createQuery(qString, typeClass);
+        for (Map.Entry<String,Object> entry : parameters.entrySet()){
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
+        try {
+            List<T> o = q.getResultList();
+            return o;
         } catch (NoResultException e) {
             return null;
         } finally {

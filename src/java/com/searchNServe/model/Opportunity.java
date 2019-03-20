@@ -7,10 +7,12 @@ package com.searchNServe.model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  *
@@ -23,6 +25,8 @@ public class Opportunity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Column(columnDefinition="clob(4000)")
+    @Lob
     private String description;
     private String city;
     private String state;
