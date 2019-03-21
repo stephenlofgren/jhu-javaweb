@@ -18,6 +18,9 @@
     <link href="css/main.css" rel="stylesheet">
     </head>
   <body>
+      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+      
       <%@ include file="/fragments/header.jspf" %>
       <%@ include file="/fragments/carousel.jspf" %>
       <%@ include file="/fragments/features.jspf" %>
