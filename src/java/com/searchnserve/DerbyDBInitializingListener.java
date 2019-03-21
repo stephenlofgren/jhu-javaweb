@@ -18,7 +18,26 @@ public class DerbyDBInitializingListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         
-        //example create object
+        InitOpportunitySample();
+        
+        Opportunity sameOp;
+        sameOp = OpportunityDB.selectOpportunityByTitle("Tutoring at the YMCA");
+
+        List<Opportunity> ops = OpportunityDB.selectOpportunityRandom(4);
+        
+            
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent event) {
+        //DBUtil.destroyDB();
+    }
+    
+    
+    private void InitOpportunitySample(){
+        //clean up old data, if we are actually creating new data at some point this may be bad
+        EMFUtil.runUpdate("delete from Opportunity");
+
         Opportunity o = new Opportunity();
         o.setContactName("Stephen Lofgren");
         o.setTitle("Tutoring at the YMCA");
@@ -86,20 +105,32 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         o.setCity("Ocean City");
         o.setState("New Jersey");
         GenericEntityDB.<Opportunity>insert(o);
+        o = new Opportunity();
+        o.setContactName("Stephen Lofgren");
+        o.setTitle("Information Desk Volunteer");
+        o.setDescription("Information Desk volunteers are needed for weekdays (8:30am - 3:30pm or 3:30pm - 8:30pm) and weekends (11:00am - 8:30pm) to greet and assist visitors & patients, answer phone inquiries, deliver patient mail & flowers, transport visitors, problem solve patient & visitor inquiries. This is an interesting position to learn all about the hospital and what services it provides.\n" +
+"\n" +
+"The Information Desk Supervisor arranges training including a tour of the campus, observation of other Information Desk Volunteers, and on-the-job training, length of the training is based on individual need.");
+        o.setEmailAddress("fakevolunteeringcontact@jfkmedicalcenter.org");
+        o.setCity("Edison");
+        o.setState("New Jersey");
+        GenericEntityDB.<Opportunity>insert(o);
+        o = new Opportunity();
+        o.setContactName("Stephen Lofgren");
+        o.setTitle("Emergency Department Volunteer");
+        o.setDescription("Emergency Department is looking for volunteers interested in Healthcare careers.");
+        o.setEmailAddress("fakevolunteeringcontact@jfkmedicalcenter.org");
+        o.setCity("Edison");
+        o.setState("New Jersey");
+        GenericEntityDB.<Opportunity>insert(o);
+        o = new Opportunity();
+        o.setContactName("Stephen Lofgren");
+        o.setTitle("KIT KART - CROCHET , SEW VOLUNTEER");
+        o.setDescription("The Kit Kart Volunteer circulates a cart stocked with crafts items among patients on approved units throughout the medical center. This program contributes to patient enjoyment and satisfaction and helps deflect some of the anxiety and feelings of displacement, loneliness and boredom associated with hospitalization.");
+        o.setEmailAddress("fakevolunteeringcontact@jfkmedicalcenter.org");
+        o.setCity("Edison");
+        o.setState("New Jersey");
+        GenericEntityDB.<Opportunity>insert(o);
         
-        
-        Opportunity sameOp;
-        sameOp = OpportunityDB.selectOpportunityByTitle("Tutoring at the YMCA");
-
-        List<Opportunity> ops = OpportunityDB.selectOpportunityRandom(4);
-        
-        //clean up the example and demo run simple update query
-        //EMFUtil.runUpdate("delete from Opportunity");
-            
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent event) {
-        //DBUtil.destroyDB();
     }
 }

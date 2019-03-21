@@ -22,9 +22,7 @@
       <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
       
       <%@ include file="/fragments/header.jspf" %>
-      <%@ include file="/fragments/carousel.jspf" %>
-      <%@ include file="/fragments/features.jspf" %>
-      <%@ include file="/fragments/testimonials.jspf" %>
+      <%@ include file="/fragments/about.jspf" %>
       <%@ include file="/fragments/footer.jspf" %>
       
     <!-- Bootstrap core JavaScript

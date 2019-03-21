@@ -1,0 +1,3 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<h2>Here is some information about us, put some glowing stuff here, maybe static or if we want to go crazy then people can submit reviews and have a selection show here.</h2>

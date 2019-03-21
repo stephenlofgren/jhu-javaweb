@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author stephen
  */
 @WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
-public class HomeController extends HttpServlet {
+public class OpportunityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,8 @@ public class HomeController extends HttpServlet {
         FeaturesViewModel fvm = new FeaturesViewModel();
         List<Opportunity> l;
         l = OpportunityDB.selectOpportunityRandom(6); 
-        fvm.setOpportunities(l);
-        request.setAttribute(fvm.getModelName(), fvm);
-        request.setAttribute("PageName", "SearchNServe Home");
-        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        request.setAttribute("PageName", "Opportunity Details");
+        getServletContext().getRequestDispatcher("/opportunity.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

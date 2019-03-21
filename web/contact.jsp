@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>${requestScope["PageName"]}</title>
+    <title></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,9 +22,7 @@
       <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
       
       <%@ include file="/fragments/header.jspf" %>
-      <%@ include file="/fragments/carousel.jspf" %>
-      <%@ include file="/fragments/features.jspf" %>
-      <%@ include file="/fragments/testimonials.jspf" %>
+      <%@ include file="/fragments/contact.jspf" %>
       <%@ include file="/fragments/footer.jspf" %>
       
     <!-- Bootstrap core JavaScript
