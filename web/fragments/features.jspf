@@ -8,11 +8,12 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <c:forEach items="${featuredOpportunities}" var="feature">
+        <c:set var="linkHref" value='OpportunityController?id=${feature.getId()}' />
         <div class="col-lg-4">
           <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
           <h2>${feature.getTitle()}</h2>
           <p>${fn:substring(feature.getDescription(), 0, 150)}...</p>
-          <p><a class="btn btn-secondary" href="OpportunityController" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-secondary" href=${linkHref} role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         </c:forEach>
       </div><!-- /.row -->

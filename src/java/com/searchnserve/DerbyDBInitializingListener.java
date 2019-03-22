@@ -6,6 +6,7 @@ import com.searchnserve.data.EMFUtil;
 import com.searchnserve.data.GenericEntityDB;
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
+import com.searchnserve.model.Testimonial;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
@@ -18,7 +19,9 @@ public class DerbyDBInitializingListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         
+        //putting some sample data in place.
         InitOpportunitySample();
+        InitTestimonials();
         
         Opportunity sameOp;
         sameOp = OpportunityDB.selectOpportunityByTitle("Tutoring at the YMCA");
@@ -33,6 +36,23 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         //DBUtil.destroyDB();
     }
     
+    
+    private void InitTestimonials(){
+        EMFUtil.runUpdate("delete from Testimonial");
+ 
+        Testimonial t= new Testimonial();
+        t.setText("This is the greatest site ever!  The people who made it are total Rock Stars!");
+        t.setSignature("Genuine User");
+        GenericEntityDB.<Testimonial>insert(t);
+        t = new Testimonial();
+        t.setText("I love to volunteer and this site makes it so easy for me to find Opportunities");
+        t.setSignature("D Gooder");
+        GenericEntityDB.<Testimonial>insert(t);
+        t = new Testimonial();
+        t.setText("This site is great for finding out what is going on and who needs help in my neighborhood!");
+        t.setSignature("Fred Rogers");
+        GenericEntityDB.<Testimonial>insert(t);
+    }
     
     private void InitOpportunitySample(){
         //clean up old data, if we are actually creating new data at some point this may be bad

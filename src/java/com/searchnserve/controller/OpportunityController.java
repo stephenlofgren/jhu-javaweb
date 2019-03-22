@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author stephen
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
+@WebServlet(name = "OpportunityController", urlPatterns = {"/OpportunityController"})
 public class OpportunityController extends HttpServlet {
 
     /**
@@ -36,14 +36,18 @@ public class OpportunityController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         HttpSession session = request.getSession();
-        FeaturesViewModel fvm = new FeaturesViewModel();
-        List<Opportunity> l;
-        l = OpportunityDB.selectOpportunityRandom(6); 
+        
+        long id;
+        id = Long.parseLong(request.getParameter("id"));
+        Opportunity o = OpportunityDB.selectOpportunityById(id);
+        request.setAttribute("Opportunity", o);
         request.setAttribute("PageName", "Opportunity Details");
+
         getServletContext().getRequestDispatcher("/opportunity.jsp").forward(request, response);
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

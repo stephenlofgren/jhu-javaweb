@@ -1,3 +1,35 @@
-<%-- any content can be specified here e.g.: --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page import="com.searchnserve.viewmodel.FeaturesViewModel"%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>put all the gory details about an opportunity out there</h2>
+<c:set var="opportunity" value='${requestScope["Opportunity"]}' />
+
+<script type="text/javascript">   
+ (function($j) {    
+  $j(document).ready(function() {    
+  jQuery('#favoriteLink').click(function(){  
+  $j.ajax({    
+     type: 'POST',    
+     url: 'OpportunityController/AddFavorite'),    
+     data: "",      
+     success: function(config) {    
+        console.log(config);
+      }    
+  });      
+      });    
+   });    
+})(jQuery);   
+</script>  
+    <div class="container opportunity">
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-12">
+          <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <h2>${opportunity.getTitle()}</h2>
+          <p>${opportunity.getDescription()}</p>
+          <div><label id="cityLabel">City:</label><span id="citySpan">${opportunity.getCity()}</span>
+          <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
+          <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
+          <p><a id="favoriteLink" class="btn btn-secondary" href="OpportunityController" role="button">Add to Favorites &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
