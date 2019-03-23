@@ -21,8 +21,7 @@
       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
       
-      <%@ include file="/fragments/header.jspf" %>
-      <%@ include file="/fragments/login.jspf" %>
+      <c:import url="/fragments/login.jspf" />
       <%@ include file="/fragments/footer.jspf" %>
       
     <!-- Bootstrap core JavaScript
@@ -32,11 +31,6 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        jQuery.fn.carousel.Constructor.TRANSITION_DURATION = 200000  // 2 seconds
-      });
-    </script>
   </body>
 </html>
 

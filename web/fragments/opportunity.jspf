@@ -9,7 +9,7 @@
   jQuery('#favoriteLink').click(function(){  
   $j.ajax({    
      type: 'POST',    
-     url: 'OpportunityController/AddFavorite'),    
+     url: 'OpportunityController/AddFavorite',    
      data: "",      
      success: function(config) {    
         console.log(config);
@@ -29,7 +29,7 @@
           <div><label id="cityLabel">City:</label><span id="citySpan">${opportunity.getCity()}</span>
           <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
           <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
-          <p><a id="favoriteLink" class="btn btn-secondary" href="OpportunityController" role="button">Add to Favorites &raquo;</a></p>
+          <p><a id="favoriteLink" class="btn btn-secondary" href="FavoritesController" role="button">Add to Favorites &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->

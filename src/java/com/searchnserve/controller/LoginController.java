@@ -5,6 +5,7 @@
  */
 package com.searchnserve.controller;
 
+import com.searchnserve.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -33,8 +34,10 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-         getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+
+        
+        //getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
    
     }
 
@@ -64,7 +67,16 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                HttpSession session = request.getSession();
+        User u = new User();
+        u.setEmailAddress("stephenlofgren@hotmail.com");
+        u.setName("Stephen Lofgren");
+        u.setPasswordHash("fakepassword");
+        session.setAttribute("User", u);
+        response.sendRedirect(request.getHeader("referer"));
+        String returnController = (String)request.getAttribute("returnController");
+        request.removeAttribute("returnController");
+        getServletContext().getRequestDispatcher(returnController).forward(request, response);
     }
 
     /**
