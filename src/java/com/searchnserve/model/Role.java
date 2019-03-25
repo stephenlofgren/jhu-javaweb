@@ -16,14 +16,12 @@ import javax.persistence.Id;
  * @author stephen
  */
 @Entity
-public class User implements Serializable {
+public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String emailAddress;
-    private String passwordHash;
+    private String roleName;
 
     public Long getId() {
         return id;
@@ -43,10 +41,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof Role)) {
             return false;
         }
-        User other = (User) object;
+        Role other = (Role) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -55,48 +53,21 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.searchnserve.model.User[ id=" + id + " ]";
+        return "com.searchnserve.model.Role[ id=" + id + " ]";
     }
 
     /**
-     * @return the name
+     * @return the roleName
      */
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
     /**
-     * @param name the name to set
+     * @param roleName the roleName to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
-
-    /**
-     * @return the emailAddress
-     */
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    /**
-     * @param emailAddress the emailAddress to set
-     */
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    /**
-     * @return the passwordHash
-     */
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    /**
-     * @param passwordHash the passwordHash to set
-     */
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+    
 }

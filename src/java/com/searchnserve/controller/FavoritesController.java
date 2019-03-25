@@ -39,12 +39,13 @@ public class FavoritesController extends HttpServlet {
         User u = (User)session.getAttribute("User");
         if(u == null){
             session.setAttribute("AfterLogin", request);
-            request.setAttribute("returnController", "/FavoritesController");
+            request.setAttribute("returnUri", "/FavoritesController");
             getServletContext().getRequestDispatcher("/LoginController").forward(request, response);
             return;
         }
         
         long id;
+        session.removeAttribute("User");
         id = Long.parseLong(request.getParameter("id"));
         Opportunity o = OpportunityDB.selectOpportunityById(id);
         request.setAttribute("Opportunity", o);

@@ -3,21 +3,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <c:set var="opportunity" value='${requestScope["Opportunity"]}' />
 
-<script type="text/javascript">   
- (function($j) {    
-  $j(document).ready(function() {    
-  jQuery('#favoriteLink').click(function(){  
-  $j.ajax({    
-     type: 'POST',    
-     url: 'OpportunityController/AddFavorite',    
-     data: "",      
-     success: function(config) {    
-        console.log(config);
-      }    
-  });      
-      });    
-   });    
-})(jQuery);   
+
 </script>  
     <div class="container opportunity">
       <!-- Three columns of text below the carousel -->
@@ -29,7 +15,8 @@
           <div><label id="cityLabel">City:</label><span id="citySpan">${opportunity.getCity()}</span>
           <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
           <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
-          <p><a id="favoriteLink" class="btn btn-secondary" href="FavoritesController" role="button">Add to Favorites &raquo;</a></p>
+              <c:set var="favoriteLinkUri" value="FavoritesController?id=${requestScope['id']}" />
+          <p><a id="favoriteLink" class="btn btn-secondary" href="${favoriteLinkUri}" role="button">Add to Favorites &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->

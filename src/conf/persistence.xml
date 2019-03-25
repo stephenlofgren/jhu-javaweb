@@ -5,6 +5,7 @@
     <class>com.searchnserve.model.Opportunity</class>
     <class>com.searchnserve.model.Testimonial</class>
     <class>com.searchnserve.model.User</class>
+    <class>com.searchnserve.model.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/jhu-javaweb"/>

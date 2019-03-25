@@ -69,13 +69,13 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
                 HttpSession session = request.getSession();
         User u = new User();
-        u.setEmailAddress("stephenlofgren@hotmail.com");
+        u.setEmailAddress((String) request.getAttribute("emailAddress"));
         u.setName("Stephen Lofgren");
         u.setPasswordHash("fakepassword");
         session.setAttribute("User", u);
         response.sendRedirect(request.getHeader("referer"));
         String returnController = (String)request.getAttribute("returnController");
-        request.removeAttribute("returnController");
+        request.removeAttribute("returnUri");
         getServletContext().getRequestDispatcher(returnController).forward(request, response);
     }
 

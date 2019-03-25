@@ -2,9 +2,11 @@
 <%@ page pageEncoding="UTF-8" %>
 <h2>put a login form here</h2>
 <div>
-<form method="post" action="login" method="post">
+
+<form action="LoginController" method="post">
+    <input type="text" id="returnUri" value="${requestScope[""]}"
     Email ID:<input type="text" name="email" /><br/>
     Password:<input type="text" name="pass" /><br/>
-    <input type="submit" value="login" />
+    <input type="submit" value="LoginController" />
 </form>  
 </div>
