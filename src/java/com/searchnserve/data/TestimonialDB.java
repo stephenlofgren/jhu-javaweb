@@ -24,7 +24,7 @@ public class TestimonialDB {
         return GenericEntityDB.<Testimonial>selectOne(qString, params, Testimonial.class);
     }
 
-    public static List<Testimonial> selectOpportunityRandom(int max) {
+    public static List<Testimonial> selectTestimonialRandom(int max) {
         String qString = "select id from JHUJAVAWEB.TESTIMONIAL order by RANDOM()";
         List o = EMFUtil.getResultList(qString, max);
         List<Testimonial> results = new ArrayList<Testimonial>();

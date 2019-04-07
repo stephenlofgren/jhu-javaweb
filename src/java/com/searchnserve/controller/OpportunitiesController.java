@@ -5,8 +5,12 @@
  */
 package com.searchnserve.controller;
 
+import com.searchnserve.data.OpportunityDB;
+import com.searchnserve.model.Opportunity;
+import com.searchnserve.viewmodel.OpportunitiesViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +38,23 @@ public class OpportunitiesController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-         getServletContext().getRequestDispatcher("/opportunities.jsp").forward(request, response);
+        OpportunitiesViewModel ovm = new OpportunitiesViewModel();
+        ovm.setSearchString(request.getParameter("searchString"));
+
+        if(ovm.getSearchString() != null){
+            ovm.setOpportunities(
+                OpportunityDB.selectOpportunityByText(ovm.getSearchString())
+            );
+        }
+        else{
+            ovm.setOpportunities(
+                OpportunityDB.selectOpportunityLimit(20)
+            );
+        }
+        
+        request.setAttribute(ovm.getModelName(), ovm);
+        request.setAttribute("PageName", "Opportunities");
+        getServletContext().getRequestDispatcher("/opportunities.jsp").forward(request, response);
    
     }
 

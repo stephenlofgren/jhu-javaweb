@@ -7,12 +7,15 @@ package com.searchnserve.model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -30,12 +33,13 @@ public class Opportunity implements Serializable {
     private String description;
     private String city;
     private String state;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    @Temporal(TemporalType.DATE)
+    private Date startTime;
+    @Temporal(TemporalType.DATE)
+    private Date endTime;
     private String contactName;
     private String phoneNumber;
     private String emailAddress;
-    
     
     public Long getId() {
         return id;
@@ -84,19 +88,19 @@ public class Opportunity implements Serializable {
         this.city = city;
     }
 
-    public LocalTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

@@ -6,8 +6,10 @@
 package com.searchnserve.controller;
 
 import com.searchnserve.data.OpportunityDB;
+import com.searchnserve.data.TestimonialDB;
 import com.searchnserve.model.Opportunity;
 import com.searchnserve.viewmodel.FeaturesViewModel;
+import com.searchnserve.viewmodel.TestimonialsViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -43,6 +45,11 @@ public class HomeController extends HttpServlet {
         l = OpportunityDB.selectOpportunityRandom(6); 
         fvm.setOpportunities(l);
         request.setAttribute(fvm.getModelName(), fvm);
+        
+        TestimonialsViewModel tvm = new TestimonialsViewModel();
+        tvm.setTestimonials(TestimonialDB.selectTestimonialRandom(3));
+        request.setAttribute(tvm.getModelName(), tvm);
+        
         request.setAttribute("PageName", "SearchNServe Home");
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
     }

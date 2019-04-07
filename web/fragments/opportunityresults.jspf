@@ -1,3 +1,41 @@
-<%-- any content can be specified here e.g.: --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page import="com.searchnserve.viewmodel.OpportunitiesViewModel"%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>Hello World!</h2>
+<c:set var="opportunityViewModel" value='${requestScope["OpportunitiesViewModel"]}' />
+<c:set var="opportunityViewModel" value='${requestScope["OpportunitiesViewModel"]}' />
+<c:set var="opportunities" value='${opportunityViewModel.getOpportunities()}' />
+
+<c:forEach items="${opportunities}" var="opportunity">
+<div class="row">
+    <div class="container opportunity">
+        <div class="row">
+          <div class="col-lg-3">
+              <h2>Title</h2>
+          </div>
+          <div class="col-lg-3">
+              <h2>City</h2>
+          </div>      
+          <div class="col-lg-3">
+              <h2>Contact Name</h2>
+          </div>      
+          <div class="col-lg-3">
+              <h2>Favorite</h2>
+          </div>
+        </div>
+        <div>
+          <div class="col-lg-3">
+              <span>title</span>
+          </div>
+          <div class="col-lg-3">
+              <span>city</span>
+          </div>
+          <div class="col-lg-3">
+              <span>contact</span>
+          </div>
+          <div class="col-lg-3">
+              <span>favorite</span>
+          </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->    
+</div>
+</c:foreach>

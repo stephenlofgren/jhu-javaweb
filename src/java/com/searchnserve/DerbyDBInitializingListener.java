@@ -21,14 +21,7 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         
         //putting some sample data in place.
         InitOpportunitySample();
-        InitTestimonials();
-        
-        Opportunity sameOp;
-        sameOp = OpportunityDB.selectOpportunityByTitle("Tutoring at the YMCA");
-
-        List<Opportunity> ops = OpportunityDB.selectOpportunityRandom(4);
-        
-            
+        InitTestimonials();            
     }
 
     @Override

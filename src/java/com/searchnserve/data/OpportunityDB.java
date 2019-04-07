@@ -21,11 +21,18 @@ import javax.persistence.TypedQuery;
  */
 public class OpportunityDB {
     
-    public static Opportunity selectOpportunityByTitle(String title) {
-        String qString = "SELECT o FROM Opportunity o where o.title = :title";
+    public static List<Opportunity> selectOpportunityByText(String text) {
+        String qString = "SELECT o FROM Opportunity o where o.title like CONCAT('%', :text, '%') or o.description like CONCAT('%', :text, '%')";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("text", text);
+        return GenericEntityDB.<Opportunity>select(qString, params, Opportunity.class);
+    }
+
+    public static List<Opportunity> selectOpportunityByTitle(String title) {
+        String qString = "SELECT o FROM Opportunity o where o.title like CONCAT('%', :title, '%')";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("title", title);
-        return GenericEntityDB.<Opportunity>selectOne(qString, params, Opportunity.class);
+        return GenericEntityDB.<Opportunity>select(qString, params, Opportunity.class);
     }
 
     public static Opportunity selectOpportunityById(long id) {
@@ -37,6 +44,17 @@ public class OpportunityDB {
 
     public static List<Opportunity> selectOpportunityRandom(int max) {
         String qString = "select id from JHUJAVAWEB.OPPORTUNITY order by RANDOM()";
+        List o = EMFUtil.getResultList(qString, max);
+        List<Opportunity> results = new ArrayList<Opportunity>();
+        for(int i = 0; i < o.size(); i++){
+            long id = (long)o.get(i);
+            Opportunity opp = selectOpportunityById(id);
+            results.add(opp);            
+        }
+        return results;
+    }
+    public static List<Opportunity> selectOpportunityLimit(int max) {
+        String qString = "select id from JHUJAVAWEB.OPPORTUNITY where endtime is null or endtime >= current_date order by id";
         List o = EMFUtil.getResultList(qString, max);
         List<Opportunity> results = new ArrayList<Opportunity>();
         for(int i = 0; i < o.size(); i++){
