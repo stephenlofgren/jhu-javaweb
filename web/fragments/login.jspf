@@ -1,12 +1,36 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>put a login form here</h2>
-<div>
-
-<form action="LoginController" method="post">
-    <input type="text" id="returnUri" value="${requestScope[""]}"
-    Email ID:<input type="text" name="email" /><br/>
-    Password:<input type="text" name="pass" /><br/>
-    <input type="submit" value="LoginController" />
-</form>  
-</div>
+<style>
+    table.center {
+        margin-left:auto; 
+        margin-right:auto;
+    }
+</style>
+<form class='col-md-12' method="post" action="LoginController">
+    <table class="center">
+        <tr>
+            <td>
+                <h2>Login</h2>
+                ${message}
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+        </tr>
+        <tr>
+            <td><input type="email" name="email" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+        </tr>
+        <tr>
+            <td><input type="password" name="password" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>
+                <br/>
+                <input type="submit" value="Login" name="login" />
+            </td>
+        </tr>
+    </table>
+</form>

@@ -5,8 +5,9 @@
  */
 package com.searchnserve.controller;
 
+import com.searchnserve.data.UserDB;
+import com.searchnserve.model.UserAccount;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +35,41 @@ public class SignupController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-         getServletContext().getRequestDispatcher("/signup.jsp").forward(request, response);
-   
+        String message = "";
+        
+        if ("Join Now".equals(request.getParameter("joinNow"))){
+            String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("confirmPassword");
+            
+            // passwords don't match
+            if (password == null || !password.equals(confirmPassword)){
+                message = "Provided passwords don't match!";
+                session.setAttribute("message", message);
+            } else{
+                UserAccount user = new UserAccount();
+                user.setName(request.getParameter("fullName"));
+                user.setEmailAddress(request.getParameter("email"));
+                user.setPasswordHash(request.getParameter("password"));
+                
+                // account already exists
+                if (UserDB.selectUserByEmail(user.getEmailAddress()) != null){
+                    message = "Provided email address already exists!";
+                } else if (UserDB.createAccount(user) == false){ // create account
+                    message = "Account could not be created";
+                }
+                
+            }
+        }
+        
+        // add message to session
+        request.setAttribute("message", message);
+        
+        // navigate to the signup screen
+        getServletContext().getRequestDispatcher("/signup.jsp").forward(request, response);
+
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

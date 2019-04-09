@@ -5,9 +5,9 @@
  */
 package com.searchnserve.controller;
 
-import com.searchnserve.model.User;
+import com.searchnserve.data.UserDB;
+import com.searchnserve.model.UserAccount;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +34,27 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-
+        HttpSession session = request.getSession();
+        String message = "";
+        UserAccount userAccount = new UserAccount();
         
-        //getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        if ("Login".equals(request.getParameter("login"))){
+            userAccount.setEmailAddress(request.getParameter("email"));
+            userAccount.setPasswordHash(request.getParameter("password"));
+            
+            if ((userAccount = UserDB.login(userAccount)) != null){
+                session.setAttribute("userAccount", userAccount);
+                message = "Login successful:" + userAccount.getName();
+            } else {
+                 // add message to session
+                message = "Login unsuccessful";
+            }
+        }
+
+        request.setAttribute("message", message);
+        
+        // navigate to the login screen
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
    
     }
 
@@ -67,16 +84,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                HttpSession session = request.getSession();
-        User u = new User();
-        u.setEmailAddress((String) request.getAttribute("emailAddress"));
-        u.setName("Stephen Lofgren");
-        u.setPasswordHash("fakepassword");
-        session.setAttribute("User", u);
-        response.sendRedirect(request.getHeader("referer"));
-        String returnController = (String)request.getAttribute("returnController");
-        request.removeAttribute("returnUri");
-        getServletContext().getRequestDispatcher(returnController).forward(request, response);
+        processRequest(request, response);
     }
 
     /**

@@ -73,7 +73,7 @@ public class GenericEntityDB {
         try {
             List<T> o = q.getResultList();
             return o.get(0);
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             return null;
         } finally {
             em.close();

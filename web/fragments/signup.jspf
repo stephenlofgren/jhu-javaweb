@@ -1,3 +1,48 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>put a sign up form here</h2>
+<style>
+    table.center {
+        margin-left:auto; 
+        margin-right:auto;
+    }
+</style>
+<form class='col-md-12' method="get" action="SignupController">
+    <table class="center">
+        <tr>
+            <td>
+                <h2>Create Account</h2>
+                ${message}
+            </td>
+        </tr>
+        <tr>
+            <td>Full Name</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="fullName" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+        </tr>
+        <tr>
+            <td><input type="email" name="email" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+        </tr>
+        <tr>
+            <td><input type="password" name="password" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>Confirm Password</td>
+        </tr>
+        <tr>
+            <td><input type="password" name="confirmPassword" required="true"/><br/> </td>
+        </tr>
+        <tr>
+            <td>
+                <br/>
+                <input type="submit" value="Join Now" name="joinNow" />
+            </td>
+        </tr>
+    </table>
+</form>
