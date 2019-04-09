@@ -1,8 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page import="com.searchnserve.viewmodel.OpportunitiesViewModel"%>
+<%@page import="com.searchnserve.model.Opportunity"%>
 <%@ page pageEncoding="UTF-8" %>
 <div class="container" id='searchdialog'>
     <form id='search'>
         <div class='row'>
-            <input class='col-md-11' type='text' id='searchtext' placeholder="search text" />
+            <input class='col-md-11' type='text' id='searchtext' name='searchString' placeholder="search text" value="${param.searchString}"/>
             <button class='col-md-1' type="submit">search</button>
         </div>
     </form>

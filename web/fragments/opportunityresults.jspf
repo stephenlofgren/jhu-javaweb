@@ -1,41 +1,39 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="com.searchnserve.viewmodel.OpportunitiesViewModel"%>
 <%@ page pageEncoding="UTF-8" %>
-<c:set var="opportunityViewModel" value='${requestScope["OpportunitiesViewModel"]}' />
-<c:set var="opportunityViewModel" value='${requestScope["OpportunitiesViewModel"]}' />
+<c:set var="opportunityViewModel" value='${requestScope.OpportunitiesViewModel}' />
 <c:set var="opportunities" value='${opportunityViewModel.getOpportunities()}' />
-
-<c:forEach items="${opportunities}" var="opportunity">
-<div class="row">
-    <div class="container opportunity">
-        <div class="row">
-          <div class="col-lg-3">
+<div class="container">
+    <table class="row opportunity">
+        <tr>
+          <th>
               <h2>Title</h2>
-          </div>
-          <div class="col-lg-3">
+          </th>
+          <th>
               <h2>City</h2>
-          </div>      
-          <div class="col-lg-3">
+          </th>      
+          <th> 
               <h2>Contact Name</h2>
-          </div>      
-          <div class="col-lg-3">
+          </th>      
+          <th>
               <h2>Favorite</h2>
-          </div>
-        </div>
-        <div>
-          <div class="col-lg-3">
-              <span>title</span>
-          </div>
-          <div class="col-lg-3">
-              <span>city</span>
-          </div>
-          <div class="col-lg-3">
-              <span>contact</span>
-          </div>
-          <div class="col-lg-3">
-              <span>favorite</span>
-          </div>
-        </div><!-- /.row -->
-    </div><!-- /.container -->    
+          </th>
+        </tr>
+<c:forEach items="${requestScope.OpportunitiesViewModel.getOpportunities()}" var="opportunity">
+        <tr>
+          <td>
+              <span>${opportunity.getTitle()}</span>
+          </td>
+          <td>
+              <span>${opportunity.getCity()}</span>
+          </td>
+          <td>
+              <span>${opportunity.getEmailAddress()}</span>
+          </td>
+          <td>
+              <span>${opportunity.getTitle()}</span>
+          </td>
+        </tr><!-- /.row -->
+</c:forEach>        
+    </table><!-- /.container -->    
 </div>
-</c:foreach>

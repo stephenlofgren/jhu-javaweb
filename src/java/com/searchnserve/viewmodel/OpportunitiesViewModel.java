@@ -6,13 +6,14 @@
 package com.searchnserve.viewmodel;
 
 import com.searchnserve.model.Opportunity;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author stephen
  */
-public class OpportunitiesViewModel {
+public class OpportunitiesViewModel implements Serializable{
     private String modelName = "OpportunitiesViewModel";
     private List<Opportunity> opportunities;
     private String searchString;
@@ -58,5 +59,4 @@ public class OpportunitiesViewModel {
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
-
 }
