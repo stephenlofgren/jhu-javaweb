@@ -7,7 +7,7 @@ package com.searchnserve.controller;
 
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
-import com.searchnserve.model.User;
+import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class FavoritesController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        User u = (User)session.getAttribute("User");
+        UserAccount u = (UserAccount)session.getAttribute("User");
         if(u == null){
             session.setAttribute("AfterLogin", request);
             request.setAttribute("returnUri", "/FavoritesController");
