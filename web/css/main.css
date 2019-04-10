@@ -6,3 +6,16 @@
     height: auto;
     
 }
+.linkButton { 
+    background:none!important;
+     color:rgba(255,255,255,.5);
+     border:none; 
+     padding:8px;
+     font: inherit;
+     cursor: pointer;
+}
+
+.linkButton:hover {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+}

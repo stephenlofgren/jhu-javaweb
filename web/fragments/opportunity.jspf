@@ -15,7 +15,7 @@
           <div><label id="cityLabel">City:</label><span id="citySpan">${opportunity.getCity()}</span>
           <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
           <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
-              <c:set var="favoriteLinkUri" value="FavoritesController?id=${requestScope['id']}" />
+              <c:set var="favoriteLinkUri" value="FavoritesController?id=${param.id}" />
           <p><a id="favoriteLink" class="btn btn-secondary" href="${favoriteLinkUri}" role="button">Add to Favorites &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->

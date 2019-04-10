@@ -37,24 +37,35 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         String message = "";
         UserAccount userAccount = new UserAccount();
+
+        String returnUri = "/login.jsp";
         
         if ("Login".equals(request.getParameter("login"))){
             userAccount.setEmailAddress(request.getParameter("email"));
             userAccount.setPasswordHash(request.getParameter("password"));
             
             if ((userAccount = UserDB.login(userAccount)) != null){
-                session.setAttribute("userAccount", userAccount);
-                message = "Login successful:" + userAccount.getName();
+                if(request.getAttribute("returnUri") == null){
+                    session.setAttribute("userAccount", userAccount);
+                    message = "Login successful:" + userAccount.getName();
+                }
+                else{
+                    returnUri = (String) request.getAttribute("returnUri");
+                    request.removeAttribute("returnUri");
+                }
             } else {
                  // add message to session
                 message = "Login unsuccessful";
             }
         }
+        else if("Logout".equals(request.getParameter(("logout")))){
+            session.removeAttribute("userAccount");
+        }
 
         request.setAttribute("message", message);
-        
+                
         // navigate to the login screen
-        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
    
     }
 

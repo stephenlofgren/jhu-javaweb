@@ -37,6 +37,8 @@ public class SignupController extends HttpServlet {
         HttpSession session = request.getSession();
         String message = "";
         
+        String returnUri = "/signup.jsp";
+        
         if ("Join Now".equals(request.getParameter("joinNow"))){
             String password = request.getParameter("password");
             String confirmPassword = request.getParameter("confirmPassword");
@@ -44,7 +46,6 @@ public class SignupController extends HttpServlet {
             // passwords don't match
             if (password == null || !password.equals(confirmPassword)){
                 message = "Provided passwords don't match!";
-                session.setAttribute("message", message);
             } else{
                 UserAccount user = new UserAccount();
                 user.setName(request.getParameter("fullName"));
@@ -56,16 +57,25 @@ public class SignupController extends HttpServlet {
                     message = "Provided email address already exists!";
                 } else if (UserDB.createAccount(user) == false){ // create account
                     message = "Account could not be created";
+                } else {
+                    if(request.getAttribute("returnUri") == null){
+                        session.setAttribute("userAccount", user);
+                        message = "Account Created:" + user.getName();
+                    }
+                    else{
+                        returnUri = (String) request.getAttribute("returnUri");
+                        request.removeAttribute("returnUri");
+                    }
                 }
                 
             }
         }
         
-        // add message to session
+        // add message to request
         request.setAttribute("message", message);
         
         // navigate to the signup screen
-        getServletContext().getRequestDispatcher("/signup.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
 
     }
     

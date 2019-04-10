@@ -36,7 +36,7 @@ public class FavoritesController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        UserAccount u = (UserAccount)session.getAttribute("User");
+        UserAccount u = (UserAccount)session.getAttribute("userAccount");
         if(u == null){
             session.setAttribute("AfterLogin", request);
             request.setAttribute("returnUri", "/FavoritesController");
@@ -44,9 +44,7 @@ public class FavoritesController extends HttpServlet {
             return;
         }
         
-        long id;
-        session.removeAttribute("User");
-        id = Long.parseLong(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("id"));
         Opportunity o = OpportunityDB.selectOpportunityById(id);
         request.setAttribute("Opportunity", o);
         request.setAttribute("PageName", "Opportunity Details");
