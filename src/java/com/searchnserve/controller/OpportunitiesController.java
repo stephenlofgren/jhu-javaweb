@@ -7,6 +7,7 @@ package com.searchnserve.controller;
 
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
+import com.searchnserve.model.UserAccount;
 import com.searchnserve.viewmodel.OpportunitiesViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,9 +39,21 @@ public class OpportunitiesController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        UserAccount u = (UserAccount)session.getAttribute("userAccount");
+
         OpportunitiesViewModel ovm = new OpportunitiesViewModel();
         ovm.setSearchString(request.getParameter("searchString"));
-
+        ovm.setFavoriteOnly("on".equals(request.getParameter("favoriteOnly")));
+        ovm.setCityFilter(request.getParameter("cityFilter"));
+        
+        if(u != null){
+            List<Opportunity> favs = u.getFavorites();
+            for(int i = 0; i < favs.size(); i++){
+                ovm.addFavorite(favs.get(i).getId());
+            }
+        }        
+        
+        
         if(ovm.getSearchString() != null){
             ovm.setOpportunities(
                 OpportunityDB.selectOpportunityByText(ovm.getSearchString())

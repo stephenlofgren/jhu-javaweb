@@ -5,6 +5,7 @@
  */
 package com.searchnserve.controller;
 
+import com.searchnserve.data.GenericEntityDB;
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
 import com.searchnserve.model.UserAccount;
@@ -46,6 +47,10 @@ public class FavoritesController extends HttpServlet {
         
         long id = Long.parseLong(request.getParameter("id"));
         Opportunity o = OpportunityDB.selectOpportunityById(id);
+        
+        u.addFavorite(o);
+        GenericEntityDB.update(u);
+        
         request.setAttribute("Opportunity", o);
         request.setAttribute("PageName", "Opportunity Details");
 

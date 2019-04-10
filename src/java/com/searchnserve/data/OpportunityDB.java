@@ -22,14 +22,14 @@ import javax.persistence.TypedQuery;
 public class OpportunityDB {
     
     public static List<Opportunity> selectOpportunityByText(String text) {
-        String qString = "SELECT o FROM Opportunity o where o.title like CONCAT('%', :text, '%') or o.description like CONCAT('%', :text, '%')";
+        String qString = "SELECT o FROM Opportunity o where LOWER(o.title) like LOWER(CONCAT('%', :text, '%')) or LOWER(o.description) like LOWER(CONCAT('%', :text, '%'))";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("text", text);
         return GenericEntityDB.<Opportunity>select(qString, params, Opportunity.class);
     }
 
     public static List<Opportunity> selectOpportunityByTitle(String title) {
-        String qString = "SELECT o FROM Opportunity o where o.title like CONCAT('%', :title, '%')";
+        String qString = "SELECT o FROM Opportunity o where LOWER(o.title) like LOWER(CONCAT('%', :title, '%'))";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("title", title);
         return GenericEntityDB.<Opportunity>select(qString, params, Opportunity.class);

@@ -6,10 +6,14 @@
 package com.searchnserve.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,7 +28,12 @@ public class UserAccount implements Serializable {
     private String name;
     private String emailAddress;
     private String passwordHash;
-
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Opportunity> favorites;
+    
     public Long getId() {
         return id;
     }
@@ -98,5 +107,32 @@ public class UserAccount implements Serializable {
      */
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    /**
+     * @return the favorites
+     */
+    public List<Opportunity> getFavorites() {
+        return favorites;
+    }
+
+    /**
+     * @param favorites the favorites to set
+     */
+    public void setFavorites(List<Opportunity> favorites) {
+        this.favorites = favorites;
+    }
+    
+    public void addFavorite(Opportunity o){
+        this.favorites.add(o);
+    }
+
+    public boolean isFavorite(Long opportunityId){
+        for(int i = 0; i < favorites.size(); i++){
+            if(favorites.get(i).getId() == opportunityId){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -4,36 +4,65 @@
 <c:set var="opportunityViewModel" value='${requestScope.OpportunitiesViewModel}' />
 <c:set var="opportunities" value='${opportunityViewModel.getOpportunities()}' />
 <div class="container">
-    <table class="row opportunity">
-        <tr>
-          <th>
-              <h2>Title</h2>
-          </th>
-          <th>
-              <h2>City</h2>
-          </th>      
-          <th> 
-              <h2>Contact Name</h2>
-          </th>      
-          <th>
-              <h2>Favorite</h2>
-          </th>
-        </tr>
-<c:forEach items="${requestScope.OpportunitiesViewModel.getOpportunities()}" var="opportunity">
-        <tr>
-          <td>
-              <span>${opportunity.getTitle()}</span>
-          </td>
-          <td>
-              <span>${opportunity.getCity()}</span>
-          </td>
-          <td>
-              <span>${opportunity.getEmailAddress()}</span>
-          </td>
-          <td>
-              <span>${opportunity.getTitle()}</span>
-          </td>
-        </tr><!-- /.row -->
-</c:forEach>        
-    </table><!-- /.container -->    
+    <div class="row">
+        <form class="filter col-3" method="post" action="OpportunitiesController">
+            <div class="text-center"><h4>Filter Results</h4></div>
+            <div>
+                <label>City:</label>
+                <select name="cityFilter">
+                    <option value="">Any</option>
+                    <c:forEach items="${requestScope.OpportunitiesViewModel.getCities()}" var="city">
+                        <option value="${city}" ${city == requestScope.OpportunitiesViewModel.getCityFilter() ? 'selected' : ''} >${city}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div>
+                <label>Favorites:</label>
+                <input type="checkbox" name="favoriteOnly"
+                       <c:if test="${requestScope.OpportunitiesViewModel.isFavoriteOnly()}">checked="checked"</c:if>
+                >
+            </div>
+            <input type="hidden" name="searchString" value="${param.searchString}"/>
+            <button type="submit" value="filter" name="filter" >search</button>
+        </form>
+        <table class="col-9 opportunities">
+            <tr>
+              <th>
+                  <h2>Title</h2>
+              </th>
+              <th>
+                  <h2>City</h2>
+              </th>      
+              <th> 
+                  <h2>Contact Name</h2>
+              </th>      
+              <th>
+                  <h2>Favorite</h2>
+              </th>
+            </tr>
+            <c:forEach items="${requestScope.OpportunitiesViewModel.getOpportunities()}" var="opportunity">
+            <tr>
+              <td>
+                  <span>${opportunity.getTitle()}</span>
+              </td>
+              <td>
+                  <span>${opportunity.getCity()}</span>
+              </td>
+              <td>
+                  <span>${opportunity.getEmailAddress()}</span>
+              </td>
+              <td>
+                  <c:set var="favoriteLinkUri" value="FavoritesController?id=${opportunity.getId()}" />
+                  <c:set var="favoriteIconUri" value="asset/image/fav-not.png" />
+                  <c:if test="${requestScope.OpportunitiesViewModel.isFavorite(opportunity.getId())}">
+                      <c:set var="favoriteIconUri" value="asset/image/fav.png" />
+                  </c:if>
+                  <p>
+                      <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
+                  </p>
+              </td>
+            </tr><!-- /.row -->
+            </c:forEach>        
+        </table><!-- /.container -->    
+    </div>
 </div>

@@ -19,3 +19,14 @@
     color: rgba(255,255,255,.75);
     text-decoration: none;
 }
+
+table.opportunities {
+    border: #000;
+    border-style: solid;
+}
+
+table.opportunities td {
+    padding: 5px;
+    border: #000;
+    border-style: solid;
+}
