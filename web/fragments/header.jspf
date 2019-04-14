@@ -42,7 +42,7 @@
             </c:if>
         <form action="OpportunitiesController" class="form-inline mt-2 mt-md-0">
                 <li>
-                    <input class="form-control mr-sm-2" name='searchText' type="text" placeholder="Search"> 
+                    <input class="form-control mr-sm-2" name='searchString' type="text" placeholder="Search"> 
                 </li>
                 <li>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
