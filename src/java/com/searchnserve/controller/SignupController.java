@@ -45,7 +45,7 @@ public class SignupController extends HttpServlet {
             
             // passwords don't match
             if (password == null || !password.equals(confirmPassword)){
-                message = "Provided passwords don't match!";
+                message = "Provided passwords don't match.";
             } else{
                 UserAccount user = new UserAccount();
                 user.setName(request.getParameter("fullName"));
@@ -54,13 +54,16 @@ public class SignupController extends HttpServlet {
                 
                 // account already exists
                 if (UserDB.selectUserByEmail(user.getEmailAddress()) != null){
-                    message = "Provided email address already exists!";
+                    message = "Provided email address already exists.";
                 } else if (UserDB.createAccount(user) == false){ // create account
-                    message = "Account could not be created";
+                    message = "Account could not be created.";
                 } else {
                     if(request.getAttribute("returnUri") == null){
                         session.setAttribute("userAccount", user);
-                        message = "Account Created:" + user.getName();
+                        message = "Account has been created. Welcome " + user.getName() + "!";
+                        
+                        // login was successful, navigate to home
+                        returnUri = "/home.jsp";
                     }
                     else{
                         returnUri = (String) request.getAttribute("returnUri");

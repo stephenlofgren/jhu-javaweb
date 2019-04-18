@@ -1,16 +1,29 @@
 <%@ page pageEncoding="UTF-8" %>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+<script>
+    
+function logout() {
+    document.getElementById('action').value = "Logout";
+    document.getElementById('loginController').submit();
+}   
+
+function editAccount() {
+    document.getElementById('action').value = "Edit Account";
+    document.getElementById('loginController').submit();
+}  
+
+</script>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Search 'N Serve</a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+    </button>
+    <a class="navbar-brand" href="#">Search 'N Serve</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="HomeController">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="OpportunitiesController">Opportunites</a>
+                <a class="nav-link" href="OpportunitiesController">Opportunities</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="AboutController">About</a>
@@ -19,7 +32,15 @@
                 <a class="nav-link" href="ContactController">Contact Us</a>
             </li>
         </ul>
-            <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
+            <form action="OpportunitiesController" class="form-inline mt-2 mt-md-0">
+                <li>
+                    <input class="form-control mr-sm-2" name='searchText' type="text" placeholder="Search"> 
+                </li>
+                <li>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </li>
+            </form>
             <c:if test="${empty sessionScope['userAccount']}">
                 <li class="nav-item">
                     <a class="nav-link" href="SignupController">
@@ -33,21 +54,26 @@
                 </li>
             </c:if>
             <c:if test="${not empty sessionScope['userAccount']}">
-            <form action="LoginController" class="form-inline mt-2 mt-md-0">
-                <li class="nav-item">
-                    <button class="linkButton" type="submit" value="Logout" name="logout">
-                        Sign Out: ${sessionScope['userAccount'].getName()}
-                    </button>
-                </li>
+                <form id="loginController" action="LoginController"
+                      class="form-inline mt-2 mt-md-0">
+                    &nbsp;
+                    <div class="dropdown">
+                        <input type="hidden" name="action" id="action" />
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" 
+                                id="dropdownMenuButton" data-toggle="dropdown" 
+                                aria-haspopup="true" aria-expanded="false">
+                            Hi ${sessionScope['userAccount'].getName()}!
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" onclick="editAccount();">
+                                Edit Account</a>
+                            <a class="dropdown-item" href="#" 
+                               onclick="logout();">Sign Out</a>
+                        </div>
+                    </div>
+                </form>
             </c:if>
-        <form action="OpportunitiesController" class="form-inline mt-2 mt-md-0">
-                <li>
-                    <input class="form-control mr-sm-2" name='searchString' type="text" placeholder="Search"> 
-                </li>
-                <li>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </li>
-        </form>
-            </ul>
-      </div>
-    </nav>
+        </ul>
+    </div>
+</nav>
+                        

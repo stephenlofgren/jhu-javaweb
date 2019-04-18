@@ -11,7 +11,7 @@
         <tr>
             <td>
                 <h2>Login</h2>
-                ${message}
+                <span style="color:red">${message}</span>
             </td>
         </tr>
         <tr>

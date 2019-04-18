@@ -47,7 +47,10 @@ public class LoginController extends HttpServlet {
             if ((userAccount = UserDB.login(userAccount)) != null){
                 if(request.getAttribute("returnUri") == null){
                     session.setAttribute("userAccount", userAccount);
-                    message = "Login successful:" + userAccount.getName();
+                    message = "Login successful.";
+                    
+                    // login is successful, navigate to home
+                    returnUri = "/home.jsp";
                 }
                 else{
                     returnUri = (String) request.getAttribute("returnUri");
@@ -55,11 +58,18 @@ public class LoginController extends HttpServlet {
                 }
             } else {
                  // add message to session
-                message = "Login unsuccessful";
+                message = "Login unsuccessful.";
             }
         }
-        else if("Logout".equals(request.getParameter(("logout")))){
+        else if("Logout".equals(request.getParameter(("action")))){
             session.removeAttribute("userAccount");
+            
+            // navigate to home after logout
+            returnUri = "/home.jsp";
+        }
+        else if("Edit Account".equals(request.getParameter(("action")))){
+            // navigate to home after logout
+            returnUri = "/signup.jsp";
         }
 
         request.setAttribute("message", message);
