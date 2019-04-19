@@ -30,3 +30,13 @@ table.opportunities td {
     border: #000;
     border-style: solid;
 }
+
+body {
+    height: 100%;
+}
+
+footer {
+		position:absolute;
+		bottom:0;
+		width:100%;
+	}
