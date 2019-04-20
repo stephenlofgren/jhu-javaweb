@@ -144,6 +144,5 @@ public class DerbyDBInitializingListener implements ServletContextListener {
         o.setCity("Edison");
         o.setState("New Jersey");
         GenericEntityDB.<Opportunity>insert(o);
-        
     }
 }

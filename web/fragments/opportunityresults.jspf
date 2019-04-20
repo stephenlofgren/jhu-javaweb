@@ -23,7 +23,7 @@
                 >
             </div>
             <input type="hidden" name="searchString" value="${param.searchString}"/>
-            <button type="submit" value="filter" name="filter" >search</button>
+            <button type="submit" value="filter" name="filter" >Filter</button>
         </form>
         <table class="col-9 opportunities">
             <tr>
@@ -41,27 +41,29 @@
               </th>
             </tr>
             <c:forEach items="${requestScope.OpportunitiesViewModel.getOpportunities()}" var="opportunity">
-            <tr>
-              <td>
-                  <span>${opportunity.getTitle()}</span>
-              </td>
-              <td>
-                  <span>${opportunity.getCity()}</span>
-              </td>
-              <td>
-                  <span>${opportunity.getEmailAddress()}</span>
-              </td>
-              <td>
-                  <c:set var="favoriteLinkUri" value="FavoritesController?id=${opportunity.getId()}" />
-                  <c:set var="favoriteIconUri" value="asset/image/fav-not.png" />
-                  <c:if test="${requestScope.OpportunitiesViewModel.isFavorite(opportunity.getId())}">
-                      <c:set var="favoriteIconUri" value="asset/image/fav.png" />
-                  </c:if>
-                  <p>
-                      <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
-                  </p>
-              </td>
-            </tr><!-- /.row -->
+                <c:if test="${  empty requestScope.OpportunitiesViewModel.getCityFilter() or requestScope.OpportunitiesViewModel.getCityFilter() == opportunity.getCity()}">
+                    <tr>
+                      <td>
+                          <span>${opportunity.getTitle()}</span>
+                      </td>
+                      <td>
+                          <span>${opportunity.getCity()}</span>
+                      </td>
+                      <td>
+                          <span>${opportunity.getEmailAddress()}</span>
+                      </td>
+                      <td>
+                          <c:set var="favoriteLinkUri" value="FavoritesController?id=${opportunity.getId()}&returnUri=OpportunitiesController" />
+                          <c:set var="favoriteIconUri" value="asset/image/fav-not.png" />
+                          <c:if test="${requestScope.OpportunitiesViewModel.isFavorite(opportunity.getId())}">
+                              <c:set var="favoriteIconUri" value="asset/image/fav.png" />
+                          </c:if>
+                          <p>
+                              <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
+                          </p>
+                      </td>
+                    </tr><!-- /.row -->
+                </c:if>
             </c:forEach>        
         </table><!-- /.container -->    
     </div>

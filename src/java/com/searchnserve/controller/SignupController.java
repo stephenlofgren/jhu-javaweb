@@ -58,8 +58,8 @@ public class SignupController extends HttpServlet {
                 } else if (UserDB.createAccount(user) == false){ // create account
                     message = "Account could not be created.";
                 } else {
+                    session.setAttribute("userAccount", user);
                     if(request.getAttribute("returnUri") == null){
-                        session.setAttribute("userAccount", user);
                         message = "Account has been created. Welcome " + user.getName() + "!";
                         
                         // login was successful, navigate to home

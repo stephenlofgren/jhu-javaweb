@@ -45,14 +45,15 @@ public class LoginController extends HttpServlet {
             userAccount.setPasswordHash(request.getParameter("password"));
             
             if ((userAccount = UserDB.login(userAccount)) != null){
-                if(request.getAttribute("returnUri") == null){
-                    session.setAttribute("userAccount", userAccount);
+                session.setAttribute("userAccount", userAccount);
+                if(request.getAttribute("returnUri") == null){ //check to see if there is somewhere else we need to be
                     message = "Login successful.";
                     
                     // login is successful, navigate to home
                     returnUri = "/home.jsp";
                 }
                 else{
+                    //return where the calling request indicated we should and remove that attribute
                     returnUri = (String) request.getAttribute("returnUri");
                     request.removeAttribute("returnUri");
                 }

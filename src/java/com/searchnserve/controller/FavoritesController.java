@@ -37,14 +37,23 @@ public class FavoritesController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        //first get a UserAccount from session
         UserAccount u = (UserAccount)session.getAttribute("userAccount");
+        
+        //if the UserAccount is null then we need to login
         if(u == null){
-            session.setAttribute("AfterLogin", request);
+            //first set up a returnUri
+            //the LoginController will forward back to this controller when the user logs in
             request.setAttribute("returnUri", "/FavoritesController");
+            //forward to the LoginController
             getServletContext().getRequestDispatcher("/LoginController").forward(request, response);
+            //we don't have anything more to do here until we have a user so return.
             return;
         }
         
+        String returnUri = request.getParameter("returnUri") == null ? 
+                "/opportunity.jsp" : "/" + (String) request.getParameter("returnUri");
+
         long id = Long.parseLong(request.getParameter("id"));
         Opportunity o = OpportunityDB.selectOpportunityById(id);
         
@@ -54,7 +63,7 @@ public class FavoritesController extends HttpServlet {
         request.setAttribute("Opportunity", o);
         request.setAttribute("PageName", "Opportunity Details");
 
-        getServletContext().getRequestDispatcher("/opportunity.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
 
     }
 
