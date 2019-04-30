@@ -29,7 +29,8 @@ public class UserDB {
     }
 
     /**
-     * Creates a new user account by inserting a record into the user object
+     * Creates a new user account by inserting a record into the UserAccount
+     * table
      *
      * @param user
      */
@@ -42,6 +43,22 @@ public class UserDB {
             accountCreated = false;
         }
         return accountCreated;
+    }
+    
+    /**
+     * Updates a user account by updating a record in the UserAccount table
+     *
+     * @param user
+     */
+    public static boolean updateAccount(UserAccount user) {
+        boolean accountUpdated = true;
+
+        try {
+            GenericEntityDB.update(user);
+        } catch (Exception ex) {
+            accountUpdated = false;
+        }
+        return accountUpdated;
     }
 
     /**

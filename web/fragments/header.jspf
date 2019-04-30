@@ -43,7 +43,7 @@ function editAccount() {
             </form>
             <c:if test="${empty sessionScope['userAccount']}">
                 <li class="nav-item">
-                    <a class="nav-link" href="SignupController">
+                    <a class="nav-link" href="signup.jsp">
                         <span>Sign Up</span>
                     </a>
                 </li>

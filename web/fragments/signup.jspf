@@ -8,12 +8,11 @@
     }
 </style>
 <%
-    UserAccount userAccount = (UserAccount) request.getSession()
-            .getAttribute("userAccount");
-            
-    String createOrUpdate = userAccount == null?"Create":"Update";        
+    UserAccount userAccount = 
+            (UserAccount) request.getSession().getAttribute("userAccount");
+    String createOrUpdate = userAccount == null?"Create":"Update";  
 %>
-<form class='col-md-12' method="get" action="SignupController">
+<form class='col-md-12' action="SignupController">
     <table class="center">
         <tr>
             <td>
@@ -39,22 +38,25 @@
             <td>Password</td>
         </tr>
         <tr>
-            <td><input type="password" name="password" required="true"/><br/> </td>
+            <td><input type="password" name="password" value="${userAccount.passwordHash}"
+                       required="true"/><br/> </td>
         </tr>
         <tr>
             <td>Confirm Password</td>
         </tr>
         <tr>
-            <td><input type="password" name="confirmPassword" required="true"/><br/> </td>
+            <td><input type="password" name="confirmPassword" value="${userAccount.passwordHash}"
+                       required="true"/><br/> </td>
         </tr>
         <tr>
             <td>
                 <br/>
                 <c:if test='<%= createOrUpdate.equals("Create") %>'>
-                    <input type="submit" value="Join Now" name="joinNow" />
+                    <input type="submit" value="Join Now" name="action" />
                 </c:if>
                 <c:if test='<%= !createOrUpdate.equals("Create") %>'>
-                    <input type="submit" value="Update Account" name="update" />
+                    <input type="submit" value="Update Account" name="action" />
+                    <input type="button" value="Cancel" onclick="window.location.href='home.jsp'" />
                 </c:if>
                 
             </td>
