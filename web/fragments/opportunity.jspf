@@ -16,7 +16,13 @@
           <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
           <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
               <c:set var="favoriteLinkUri" value="FavoritesController?id=${param.id}" />
-          <p><a id="favoriteLink" class="btn btn-secondary" href="${favoriteLinkUri}" role="button">Add to Favorites &raquo;</a></p>
+                <p><a id="favoriteLink" class="btn btn-secondary" href="${favoriteLinkUri}" role="button">Add to Favorites &raquo;</a></p>
+                                <c:if test="${requestScope.OpportunitiesViewModel.isFavorite(opportunity.getId())}">
+                                    <c:set var="favoriteIconUri" value="asset/image/fav.png" />
+                                </c:if>
+                                <p>
+                                    <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
+                                </p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
