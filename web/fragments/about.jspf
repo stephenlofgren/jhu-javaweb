@@ -1,3 +1,38 @@
-<%-- any content can be specified here e.g.: --%>
+<%-- any content can be specified here e.g.: 
+<p>For support using the website please contact us at <a href = "mailto: support@searchnserve.com">support@searchnserve.com</a></p>
+--%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>Here is some information about us, put some glowing stuff here, maybe static or if we want to go crazy then people can submit reviews and have a selection show here.</h2>
+<style>
+    #contactcontainer{
+        padding:20px;
+    }
+    #contactheader{
+       border-bottom: black;
+       border-bottom-style: solid;
+       margin-bottom: 50px;
+    }
+    
+</style>
+<div id="contactcontainer" class='container'>
+<div id="contactheader">
+    <h2>About Us</h2>    
+</div>
+<div id="patronheader">
+    <h2><font color = green>YOU are the Hero's in Every Community </font></h2>    
+</div>
+<p>This site was built to assist the true hero's in every community. You.</p>
+<p>You are the ones who are active in the neighborhoods, being leaders, inspiring the youth, and making the world a better place.</p>
+<p>Search 'N Serve is a tool that is meant to help serve those who are serving others. </p>
+<img src="asset/image/AboutVolunteer1.jpg" style="width:250px;height:250px;">
+<img src="asset/image/AboutVolunteer2.jpg" style="width:250px;height:250px;">
+<img src="asset/image/AboutVolunteer3.jpg" style="width:250px;height:250px;">
+<div id="aboutheader">
+    <h2><font color = green>Helping Others Change the World</font></h2>    
+</div>
+<p>If you love helping your community or want to know what opportunities are around you</p>
+<p>Sign up and make an account</p>
+<p>Search for different volunteer opportunities in you area</p>
+<p>Add them to your favorites, or post your own opportunities for others to see</p>
+<p>Send us pictures of your event to inspire others!</p>
+
+</div>
