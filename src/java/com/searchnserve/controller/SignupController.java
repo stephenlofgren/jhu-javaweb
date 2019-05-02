@@ -63,7 +63,7 @@ public class SignupController extends HttpServlet {
                         message = "Account has been created. Welcome " + user.getName() + "!";
                         
                         // login was successful, navigate to home
-                        returnUri = "/home.jsp";
+                        returnUri = "/HomeController";
                     }
                     else{
                         returnUri = (String) request.getAttribute("returnUri");
@@ -78,8 +78,7 @@ public class SignupController extends HttpServlet {
         request.setAttribute("message", message);
         
         // navigate to the signup screen
-        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
-
+        response.sendRedirect(request.getContextPath() + returnUri);   
     }
     
     

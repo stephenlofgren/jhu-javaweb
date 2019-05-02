@@ -5,6 +5,7 @@
  */
 package com.searchnserve.model;
 
+import com.searchnserve.data.GenericEntityDB;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class UserAccount implements Serializable {
     private String passwordHash;
     @OneToMany(
         cascade = CascadeType.ALL,
-        orphanRemoval = true
+        orphanRemoval = false
     )
     private List<Opportunity> favorites;
     
@@ -125,6 +126,16 @@ public class UserAccount implements Serializable {
     
     public void addFavorite(Opportunity o){
         this.favorites.add(o);
+    }
+
+    public void removeFavorite(Opportunity o){
+        for(int i = 0; i < this.favorites.size(); i++){
+            if(this.favorites.get(i).getId() == o.getId()){
+                this.favorites.remove(i);
+                return;
+            }
+        }
+        
     }
 
     public boolean isFavorite(Long opportunityId){

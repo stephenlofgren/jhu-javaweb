@@ -76,8 +76,7 @@ public class LoginController extends HttpServlet {
         request.setAttribute("message", message);
                 
         // navigate to the login screen
-        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
-   
+        response.sendRedirect(request.getContextPath() + returnUri);   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

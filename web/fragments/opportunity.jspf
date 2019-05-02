@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="com.searchnserve.viewmodel.FeaturesViewModel"%>
 <%@ page pageEncoding="UTF-8" %>
-<c:set var="opportunity" value='${requestScope["Opportunity"]}' />
+<c:set var="ViewModel" value='${requestScope["OpportunityViewModel"]}' />
+<c:set var="opportunity" value='${requestScope["OpportunityViewModel"].getOpportunity()}' />
 
 
 </script>  
@@ -16,13 +17,14 @@
           <div><label id="contactNameLabel">Contact Name:</label><span id="citySpan">${opportunity.getContactName()}</span>
           <div><label id="emailAddressLabel">Email:</label><span id="emailAddressSpan">${opportunity.getEmailAddress()}</span>
               <c:set var="favoriteLinkUri" value="FavoritesController?id=${param.id}" />
-                <p><a id="favoriteLink" class="btn btn-secondary" href="${favoriteLinkUri}" role="button">Add to Favorites &raquo;</a></p>
-                                <c:if test="${requestScope.OpportunitiesViewModel.isFavorite(opportunity.getId())}">
-                                    <c:set var="favoriteIconUri" value="asset/image/fav.png" />
-                                </c:if>
-                                <p>
-                                    <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
-                                </p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-    </div><!-- /.container -->
+                <c:set var="favoriteLinkUri" value="FavoritesController?id=${opportunity.getId()}" />
+                <c:set var="favoriteIconUri" value="asset/image/fav-not.png" />
+                <c:if test="${ViewModel.isFavorite()}">
+                    <c:set var="favoriteIconUri" value="asset/image/fav.png" />
+                </c:if>
+                <p>
+                    <a id="favoriteLink" href="${favoriteLinkUri}" role="button"><img src="${favoriteIconUri}" width="20" height="20"></a>
+                </p>
+        </div>
+      </div>
+    </div>
