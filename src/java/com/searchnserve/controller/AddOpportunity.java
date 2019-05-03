@@ -8,6 +8,8 @@ package com.searchnserve.controller;
 import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +37,7 @@ public class AddOpportunity extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        ServletContext servletContext = getServletContext();
         //first get a UserAccount from session
         UserAccount u = (UserAccount)session.getAttribute("userAccount");
         //if the UserAccount is null then we need to login
@@ -47,6 +50,8 @@ public class AddOpportunity extends HttpServlet {
         {
             //user is logged in so they can fill out the form
             getServletContext().getRequestDispatcher("/opportunityform.jsp").forward(request, response);
+            //RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/opportunityform.jspf");
+                //dispatcher.forward(request, response);
         }
     }
 

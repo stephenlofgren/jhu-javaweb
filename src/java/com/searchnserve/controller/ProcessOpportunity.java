@@ -10,6 +10,7 @@ import com.searchnserve.model.Opportunity;
 import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,14 +34,16 @@ public class ProcessOpportunity extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String title = null, city = null, state = null, description = null;
+    String name = null, email = null, title = null, city = null, state = null, description = null;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        ServletContext servletContext = getServletContext();
         //first get a UserAccount from session
         UserAccount u = (UserAccount)session.getAttribute("userAccount");
-        
+        name = u.getName();
+        email = u.getEmailAddress();
         title = request.getParameter("title");
         city = request.getParameter("city");
         state = request.getParameter("state");
@@ -54,6 +57,10 @@ public class ProcessOpportunity extends HttpServlet {
         o.setCity(city);
         o.setState(state);
         GenericEntityDB.<Opportunity>insert(o);
+        session.setAttribute("name", name);
+        session.setAttribute("email", email);
+        session.setAttribute("title", title);
+        getServletContext().getRequestDispatcher("/completeform.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

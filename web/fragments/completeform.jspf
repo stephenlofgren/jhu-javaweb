@@ -1,0 +1,23 @@
+<style>
+    #contactcontainer{
+        padding:20px;
+    }
+    #contactheader{
+       border-bottom: black;
+       border-bottom-style: solid;
+       margin-bottom: 50px;
+    }
+    
+</style>
+<div id="confirmcontainer" class='container'>
+<div id="confirmheader">
+    <h2>Thank You!</h2>    
+</div>
+<div id="patronheader">
+    <h2><font color = green>New Opportunity Form Complete</font></h2>    
+</div>
+    <p>Thank you very much ${name}! There will be an email confirmation sent to <b>${email}</b>. This will confirm you have registered <b>${title}</b></p>
+<br>
+<br>
+<br>
+<br>
