@@ -13,16 +13,42 @@
     </head>
     <body>
         <form action = "ProcessOpportunity" method = GET>
-        <b>Contact Information</b>
-        <br>
-        <!-- title field -->
-        Title: <input type = "text" name = "title" required><br>
-        <!-- city field -->
-        City: <input type = "text" name = "city" required><br>
-        <!-- city field -->
-        State <input type = "text" name = "state" required><br>
-        <!-- description field -->
-        Description: <input type = "text" name = "description" required><br>
-        <button type="SUBMIT">SUBMIT</button>
+            <table class="center">
+                <tr>
+                    New Opportunity Form
+                </tr>
+                <tr>
+                    <td>Title</td>
+                </tr>
+                <tr>
+                    <!-- title field -->
+                    <td><input type = "text" name = "title" required><br></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                </tr>
+                <tr>
+                    <!-- city field -->
+                    <td><input type = "text" name = "city" required><br></td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                </tr>
+                <tr>
+                    <!-- State field -->
+                    <td><input type = "text" name = "state" required><br></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <!-- description field -->
+                    <td><input type = "text" name = "description" required><br></td>
+                </tr>
+                <tr>
+                    <td><button type="SUBMIT">SUBMIT</button></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
