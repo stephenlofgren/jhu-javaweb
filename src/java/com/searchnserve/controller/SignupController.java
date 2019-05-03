@@ -36,53 +36,75 @@ public class SignupController extends HttpServlet {
 
         HttpSession session = request.getSession();
         String message = "";
-        
         String returnUri = "/signup.jsp";
-        
-        if ("Join Now".equals(request.getParameter("joinNow"))){
-            String password = request.getParameter("password");
-            String confirmPassword = request.getParameter("confirmPassword");
+        boolean addUser = "Join Now".equals(request.getParameter("action"));
+
+        // create new UserAccount object for add, or retrieve from session for
+        // edit
+        UserAccount user = addUser ? new UserAccount()
+                : (UserAccount) request.getSession().getAttribute("userAccount");
+        user.setName(request.getParameter("fullName"));
+
+        // verify if email exists in db for add user, or for edit user if the 
+        // email is different from what's saved for the user
+        if (addUser
+                || (!addUser && !user.getEmailAddress().equalsIgnoreCase(request.getParameter("email")))) {
             
-            // passwords don't match
-            if (password == null || !password.equals(confirmPassword)){
-                message = "Provided passwords don't match.";
-            } else{
-                UserAccount user = new UserAccount();
-                user.setName(request.getParameter("fullName"));
+            if (UserDB.selectUserByEmail(request.getParameter("email")) != null) {
+                message = "Provided email address already exists.<br/>";
+            } else {
                 user.setEmailAddress(request.getParameter("email"));
-                user.setPasswordHash(request.getParameter("password"));
-                
-                // account already exists
-                if (UserDB.selectUserByEmail(user.getEmailAddress()) != null){
-                    message = "Provided email address already exists.";
-                } else if (UserDB.createAccount(user) == false){ // create account
+            }
+            
+        }
+
+        // validate that password and password confirmation match
+        if (!request.getParameter("password").equals(
+                request.getParameter("confirmPassword"))) {
+            message += "Provided passwords don't match.";
+        } else {
+            user.setPasswordHash(request.getParameter("password"));
+        }
+
+        // if message is empty there are no validation errors, and data should
+        // be saved in the db
+        if ("".equals(message)) {
+            if (addUser) {
+                if (UserDB.createAccount(user) == false) { // create account
                     message = "Account could not be created.";
-                } else {
-                    session.setAttribute("userAccount", user);
-                    if(request.getAttribute("returnUri") == null){
-                        message = "Account has been created. Welcome " + user.getName() + "!";
-                        
-                        // login was successful, navigate to home
-                        returnUri = "/home.jsp";
-                    }
-                    else{
-                        returnUri = (String) request.getAttribute("returnUri");
-                        request.removeAttribute("returnUri");
-                    }
                 }
-                
+            } else {
+                if (UserDB.updateAccount(user) == false) { // update account
+                    message = "Account could not be updated.";
+                }
             }
         }
-        
+
+        // if message is still empty, then data was successfuly saved in the db
+        if ("".equals(message)) {
+            if (request.getAttribute("returnUri") == null) {
+                // place new or updated user into session
+                session.setAttribute("userAccount", user);
+
+                // navigate to home
+                returnUri = "/home.jsp";
+            } else {
+                returnUri = (String) request.getAttribute("returnUri");
+                request.removeAttribute("returnUri");
+            }
+        } 
+
         // add message to request
         request.setAttribute("message", message);
-        
+
+        // add temporary user to request so form values are preserved
+        request.setAttribute("userAccount", user);
+
+
         // navigate to the signup screen
         getServletContext().getRequestDispatcher(returnUri).forward(request, response);
 
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
