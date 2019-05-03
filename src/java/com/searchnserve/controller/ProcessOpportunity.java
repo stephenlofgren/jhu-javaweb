@@ -5,6 +5,8 @@
  */
 package com.searchnserve.controller;
 
+import com.searchnserve.data.GenericEntityDB;
+import com.searchnserve.model.Opportunity;
 import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bert
  */
-@WebServlet(name = "AddOpportunity", urlPatterns = {"/AddOpportunity"})
-public class AddOpportunity extends HttpServlet {
+@WebServlet(name = "ProcessOpportunity", urlPatterns = {"/ProcessOpportunity"})
+public class ProcessOpportunity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,23 +33,27 @@ public class AddOpportunity extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    String title = null, city = null, state = null, description = null;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         //first get a UserAccount from session
         UserAccount u = (UserAccount)session.getAttribute("userAccount");
-        //if the UserAccount is null then we need to login
-        if(u == null){
-            //user needs to login 
-            getServletContext().getRequestDispatcher("/LoginController").forward(request, response);
-            return;
-        }
-        else 
-        {
-            //user is logged in so they can fill out the form
-            getServletContext().getRequestDispatcher("/opportunityform.jsp").forward(request, response);
-        }
+        
+        title = request.getParameter("title");
+        city = request.getParameter("city");
+        state = request.getParameter("state");
+        description = request.getParameter("description");
+        
+        Opportunity o = new Opportunity();
+        o.setContactName(u.getName());
+        o.setTitle(title);
+        o.setDescription(description);
+        o.setEmailAddress(u.getEmailAddress());
+        o.setCity(city);
+        o.setState(state);
+        GenericEntityDB.<Opportunity>insert(o);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

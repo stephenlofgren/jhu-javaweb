@@ -66,5 +66,8 @@
                 </c:if>
             </c:forEach>        
         </table><!-- /.container -->    
+        <form action="AddOpportunity" method =GET>
+            <button type="submit">Add Opportunity!</button>
+        </form>
     </div>
 </div>
