@@ -10,6 +10,7 @@ import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,10 +97,9 @@ public class SignupController extends HttpServlet {
             // add temporary user to request so form values are preserved
             request.setAttribute("userAccount", user);
         } 
-
+        
         // navigate to the signup screen
         response.sendRedirect(request.getContextPath() + returnUri);   
-
 
     }
 
