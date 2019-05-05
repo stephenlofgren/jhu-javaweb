@@ -36,7 +36,7 @@ public class SignupController extends HttpServlet {
 
         HttpSession session = request.getSession();
         String message = "";
-        String returnUri = "/signup.jsp";
+        String returnUri = "/signup.jsp";   
         boolean addUser = "Join Now".equals(request.getParameter("action"));
 
         // create new UserAccount object for add, or retrieve from session for
@@ -82,27 +82,24 @@ public class SignupController extends HttpServlet {
 
         // if message is still empty, then data was successfuly saved in the db
         if ("".equals(message)) {
+            // place new or updated user into session
+            session.setAttribute("userAccount", user);
             if (request.getAttribute("returnUri") == null) {
-                // place new or updated user into session
-                session.setAttribute("userAccount", user);
-
-                // navigate to home
-                returnUri = "/home.jsp";
+                returnUri = "/HomeController";
             } else {
                 returnUri = (String) request.getAttribute("returnUri");
                 request.removeAttribute("returnUri");
             }
+        } else {
+            // add message to request
+            request.setAttribute("message", message);
+            // add temporary user to request so form values are preserved
+            request.setAttribute("userAccount", user);
         } 
 
-        // add message to request
-        request.setAttribute("message", message);
-
-        // add temporary user to request so form values are preserved
-        request.setAttribute("userAccount", user);
-
-
         // navigate to the signup screen
-        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
+        response.sendRedirect(request.getContextPath() + returnUri);   
+
 
     }
 

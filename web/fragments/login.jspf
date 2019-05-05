@@ -33,7 +33,7 @@
             </td>
         </tr>
         <tr>
-            <td><a href="SignupController">Sign Up</a>
+            <td><a href="signup.jsp">Sign Up</a>
         </tr>
     </table>
 </form>

@@ -7,7 +7,9 @@ package com.searchnserve.controller;
 
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
+import com.searchnserve.model.UserAccount;
 import com.searchnserve.viewmodel.FeaturesViewModel;
+import com.searchnserve.viewmodel.OpportunityViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,11 +40,26 @@ public class OpportunityController extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
+        UserAccount u = (UserAccount)session.getAttribute("userAccount");
+
         long id;
         id = Long.parseLong(request.getParameter("id"));
         Opportunity o = OpportunityDB.selectOpportunityById(id);
-        request.setAttribute("Opportunity", o);
+        
+        OpportunityViewModel vm = new OpportunityViewModel();
+        vm.setOpportunity(o);
+        
+        if(u != null){
+            List<Opportunity> favs = u.getFavorites();
+            for(int i = 0; i < favs.size(); i++){
+                if(favs.get(i).getId() == id){
+                    vm.setFavorite(true);
+                    break;
+                }
+            }
+        }        
+
+        request.setAttribute(vm.getModelName(), vm);
         request.setAttribute("PageName", "Opportunity Details");
 
         getServletContext().getRequestDispatcher("/opportunity.jsp").forward(request, response);

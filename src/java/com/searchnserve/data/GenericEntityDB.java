@@ -21,8 +21,12 @@ public class GenericEntityDB {
     
     public static <T> void insert(T t){
         EntityManager em = EMFUtil.getFactory().createEntityManager();
+        
         EntityTransaction trans = em.getTransaction();
-        trans.begin();
+        
+        if(!trans.isActive())
+            trans.begin(); 
+        
         try{
             em.persist(t);
             trans.commit();
@@ -37,13 +41,17 @@ public class GenericEntityDB {
         public static <T> void update(T t) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        trans.begin();       
+
+        if(!trans.isActive())
+            trans.begin(); 
+
         try {
-            em.merge(t);
+            t = em.merge(t);
             trans.commit();
         } catch (Exception e) {
             System.out.println(e);
-            trans.rollback();
+            if(trans != null && trans.isActive())
+                trans.rollback();
         } finally {
             em.close();
         }
@@ -52,7 +60,10 @@ public class GenericEntityDB {
     public static <T> void delete(T t) {
         EntityManager em = EMFUtil.getFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        trans.begin();        
+        
+        if(!trans.isActive())
+            trans.begin(); 
+        
         try {
             em.remove(em.merge(t));
             trans.commit();

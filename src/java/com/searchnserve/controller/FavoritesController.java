@@ -11,6 +11,7 @@ import com.searchnserve.model.Opportunity;
 import com.searchnserve.model.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,25 +47,25 @@ public class FavoritesController extends HttpServlet {
             //the LoginController will forward back to this controller when the user logs in
             request.setAttribute("returnUri", "/FavoritesController");
             //forward to the LoginController
-            getServletContext().getRequestDispatcher("/LoginController").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/LoginController");
+
             //we don't have anything more to do here until we have a user so return.
             return;
         }
         
-        String returnUri = request.getParameter("returnUri") == null ? 
-                "/opportunity.jsp" : "/" + (String) request.getParameter("returnUri");
-
         long id = Long.parseLong(request.getParameter("id"));
+        String returnUri = request.getParameter("returnUri") == null ? 
+                "/OpportunityController?id=" + id : "/" + (String) request.getParameter("returnUri");
         Opportunity o = OpportunityDB.selectOpportunityById(id);
         
-        u.addFavorite(o);
+        if(u.isFavorite(o.getId())){
+            u.removeFavorite(o);
+        } else {
+             u.addFavorite(o);
+        }
         GenericEntityDB.update(u);
         
-        request.setAttribute("Opportunity", o);
-        request.setAttribute("PageName", "Opportunity Details");
-
-        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
-
+        response.sendRedirect(request.getContextPath() + returnUri);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

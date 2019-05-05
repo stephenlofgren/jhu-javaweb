@@ -41,7 +41,7 @@ function editAccount() {
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </li>
             </form>
-            <c:if test="${empty sessionScope['userAccount']}">
+                <c:if test="${empty sessionScope['userAccount']}">
                 <li class="nav-item">
                     <a class="nav-link" href="signup.jsp">
                         <span>Sign Up</span>

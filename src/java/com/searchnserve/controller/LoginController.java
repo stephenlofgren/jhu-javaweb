@@ -76,7 +76,7 @@ public class LoginController extends HttpServlet {
         request.setAttribute("message", message);
                 
         // navigate to the login screen
-        getServletContext().getRequestDispatcher(returnUri).forward(request, response);
+        response.sendRedirect(request.getContextPath() + returnUri);   
    
     }
 
