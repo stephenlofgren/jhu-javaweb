@@ -8,15 +8,15 @@
     }
 </style>
 <%
-    UserAccount userAccount = 
-            (UserAccount) request.getSession().getAttribute("userAccount");
-    String createOrUpdate = userAccount == null?"Create":"Update";  
+    UserAccount userAccount
+            = (UserAccount) request.getSession().getAttribute("userAccount");
+    String createOrUpdate = userAccount == null ? "Create" : "Update";
 %>
 <form class='col-md-12' action="SignupController">
     <table class="center">
         <tr>
             <td>
-                <h2><%= createOrUpdate %> Account</h2>
+                <h2><%= createOrUpdate%> Account</h2>
                 <span style="color:red">${message}</span>
             </td>
         </tr>
@@ -33,7 +33,7 @@
         <tr>
             <td><input type="email" name="email" value="${userAccount.emailAddress}" 
                        required="true"/><br/> </td>
-        </tr>
+        </tr> 
         <tr>
             <td>Password</td>
         </tr>
@@ -47,19 +47,66 @@
         <tr>
             <td><input type="password" name="confirmPassword" value="${userAccount.passwordHash}"
                        required="true"/><br/> </td>
+        </tr> 
+        <tr>
+            <td>
+                <br/><hr/>Additional Information<br/><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone number</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="phoneNumber" value="${userAccount.phoneNumber}" 
+                       maxlength="10"/><br/> </td>
+        </tr>
+        <tr>
+            <td>Address Line 1</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="addressLine1" value="${userAccount.addressLine1}" 
+                       /><br/> </td>
+        </tr>
+        <tr>
+            <td>Address Line 2</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="addressLine2" value="${userAccount.addressLine2}" 
+                       /><br/> </td>
+        </tr>
+        <tr>
+            <td>City</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="city" value="${userAccount.city}" 
+                       /><br/> </td>
+        </tr>
+        <tr>
+            <td>State</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="state" value="${userAccount.state}" 
+                       /><br/> </td>
+        </tr>
+        <tr>
+            <td>Zip Code</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="zipCode" value="${userAccount.zipCode}" 
+                       maxlength="5"/><br/> </td>
         </tr>
         <tr>
             <td>
                 <br/>
-                <c:if test='<%= createOrUpdate.equals("Create") %>'>
-                    <input type="submit" value="Join Now" name="action" />
-                </c:if>
-                <c:if test='<%= !createOrUpdate.equals("Create") %>'>
-                    <input type="submit" value="Update Account" name="action" />
-                    <input type="button" value="Cancel" onclick="window.location.href='home.jsp'" />
-                </c:if>
-                
-            </td>
+        <c:if test='<%= createOrUpdate.equals("Create")%>'>
+            <input type="submit" value="Join Now" name="action" />
+        </c:if>
+        <c:if test='<%= !createOrUpdate.equals("Create")%>'>
+            <input type="submit" value="Update Account" name="action" />
+            <input type="button" value="Cancel" onclick="window.location.href = 'home.jsp'" />
+        </c:if>
+
+        </td>
         </tr>
     </table>
 </form>
