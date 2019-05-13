@@ -7,6 +7,10 @@ import com.searchnserve.data.GenericEntityDB;
 import com.searchnserve.data.OpportunityDB;
 import com.searchnserve.model.Opportunity;
 import com.searchnserve.model.Testimonial;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.attribute.PosixFileAttributeView;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
@@ -26,7 +30,7 @@ public class DerbyDBInitializingListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        //DBUtil.destroyDB();
+        EMFUtil.destroyDB();
     }
     
     

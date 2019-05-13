@@ -8,9 +8,10 @@
     <class>com.searchnserve.model.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/jhu-javaweb"/>
+      <!--property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/jhu-javaweb"/-->      
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:/home/slofgre2/derbyDB/jhu-javaweb3;create=true"/>
       <property name="javax.persistence.jdbc.user" value="jhujavaweb"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <property name="javax.persistence.jdbc.password" value="jhujavaweb"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>

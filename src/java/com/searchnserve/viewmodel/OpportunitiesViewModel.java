@@ -19,7 +19,7 @@ public class OpportunitiesViewModel implements Serializable{
     private List<Opportunity> opportunities;
     private String searchString;
     private List<Long> favorites;
-    private boolean favoriteOnly;
+    private boolean favoriteOnly = false;
     private String cityFilter;
     
     /**

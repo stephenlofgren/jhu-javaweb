@@ -1,4 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -20,19 +23,9 @@
           <img class="second-slide" src="asset/image/volunteer2.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption carousel-caption-reverse d-none d-md-block">
-              <h1>Post a volunteering oportunity</h1>
-              <p>Know about a great opportunity to make a difference. Post the oportunity to get the help you need</p>
-              <p><a class="btn btn-lg btn-primary" href="" role="button">Post an Opportunity</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img class="third-slide" src="asset/image/volunteer1-1.jpg" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption d-none d-md-block text-right">
-              <h1>Networking</h1>
-              <p>Connect with a great community of volunteers.  Make friends and make a difference.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Connect</a></p>
+              <h1>Post a volunteering opportunity</h1>
+              <p>Know about a great opportunity to make a difference. Post the opportunity to get the help you need</p>
+              <p><a class="btn btn-lg btn-primary" href="${baseURL}/AddOpportunity" role="button">Post an Opportunity</a></p>
             </div>
           </div>
         </div>
